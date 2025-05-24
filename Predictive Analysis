@@ -1,0 +1,29 @@
+# 1. Convert date_added to datetime, extract year/month:
+df['date_added'] = pd.to_datetime(df['date_added'])
+df['year_added'] = df['date_added'].dt.year
+df['month_added'] = df['date_added'].dt.month
+# 2. Convert duration into numeric:
+df['duration_num'] = df['duration'].str.extract('(\d+)').astype(float)
+# 3.Simplify genres:
+df['duration_num'] = df['duration'].str.extract('(\d+)').astype(float)
+# 4. Encode categorical variables (Label Encoding or One-Hot Encoding)
+from sklearn.preprocessing import LabelEncoder
+label_cols = ['rating', 'director', 'country']
+for col in label_cols:
+    le = LabelEncoder()
+    df[col] = le.fit_transform(df[col].astype(str))
+# 1. Prepare Features and Target
+features = ['release_year', 'duration_num', 'rating', 'country', 'year_added', 'month_added']
+X = df[features].dropna()
+y = df.loc[X.index, 'type'].apply(lambda x: 1 if x == 'Movie' else 0)  # Binary target
+# 2. Split Data
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+# 3. Train a Model (Random Forest)
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import classification_report, accuracy_score
+model = RandomForestClassifier(n_estimators=100, random_state=42)
+model.fit(X_train, y_train)
+y_pred = model.predict(X_test)
+print("Accuracy:", accuracy_score(y_test, y_pred))
+print("Classification Report:\n", classification_report(y_test, y_pred))
