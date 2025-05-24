@@ -89,6 +89,7 @@ Conclusion
 The predictive analysis demonstrates how machine learning can uncover trends and assist in automated tagging or classification of media content. By using Kaggle’s platform for development and experimentation, the project remains fully reproducible and accessible. The models developed here could serve as building blocks for recommendation engines, content filtering systems, or predictive tagging mechanisms on streaming platforms like Netflix.
 
 Output:
+
 ![Image](https://github.com/user-attachments/assets/5bb1542d-8b5e-41d5-9b3b-3ebae492c92e)
 
 ![Image](https://github.com/user-attachments/assets/2c6b59e4-ff43-4d0a-9c81-e42f5b1881b0)
